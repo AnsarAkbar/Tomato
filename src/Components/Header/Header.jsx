@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <section
       id="hero-section"
-      className="py-16 mx-auto rounded-[10px] h-full"
+      className="py-16 mx-auto rounded-[10px] h-[34vw]"
       style={{
         background: `url(${assets.header_img}) no-repeat`,
         backgroundSize: "cover",
