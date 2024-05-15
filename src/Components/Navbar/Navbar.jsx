@@ -7,8 +7,8 @@ const Navbar = () => {
   let navimges=["search_icon","basket_icon"]
   return (
     <>
-      <header className="bg-white shadow font-outfit">  
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <header className="bg-white shadow font-outfit max-w-[1920px]">  
+        <div className="container mx-auto  py-4 flex justify-between items-center">
           <img src={assets.logo} alt="" />
           <nav className="space-x-5 text-xl ">
             {

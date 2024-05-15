@@ -1,18 +1,24 @@
 import React from "react";
 import "./index.css";
 import Navbar from "./Components/Navbar/Navbar";
-import Banner from "./Components/Banner/Banner";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Cart from "./pages/Cart/Cart";
+import Placeorder from "./pages/Placeorder/Placeorder";
 
 const App = () => {
   return (
-    <>
+    <div className="max-w-[1920px] m-auto px-16 max-lg:px-10 max-md:px-5">
       <div className="text-center">
         oبِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
       </div>
-
       <Navbar />
-      <Banner />
-    </>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/cart" element={<Cart />}/>
+        <Route path="/order" element={<Placeorder />}/>
+      </Routes>
+    </div>
   );
 };
 
