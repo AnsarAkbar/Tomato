@@ -5,10 +5,6 @@ import Card from './Card';
 
 const FoodDisplay = ({ category }) => {
   const {food_list} = useContext(StoreContext)
-
-  // if (!category || !category.menu_name) {
-  //   return <div>Loading...</div>;
-  // }
   
   return (
     <>

@@ -10,8 +10,10 @@ export default {
         outfit: ['Outfit', 'sans-serif'],
       },
       color:{
-        primary:"#fff"
+        primary:"#fff",
+        orange:"#FF4C24"
       },
+      
     },
   },
   plugins: [],
