@@ -2,7 +2,6 @@ import React from "react";
 import { menu_list } from "../../assets/assets";
 
 const ExploreMenu = ({ category, setCategory }) => {
-  console.log(category)
   return (
     <div>
       <div className="py-14">
@@ -13,13 +12,13 @@ const ExploreMenu = ({ category, setCategory }) => {
           veritatis debitis perspiciatis ducimus nihil porro molestiae eum
           temporibus non cupiditate quibusdam sint.
         </p>
-        <div className="flex flex-row m-auto mt-7 gap-3 justify-center">
+        <div className="flex flex-row m-auto mt-7 gap-3 justify-center cursor-pointer">
           {menu_list.map((value, index) => (
             <div key={index} onClick={()=>setCategory(value)}>
               <img
                 src={value.menu_image}
                 alt={value}
-                className="mx-2 m-auto"
+                className={`${category.menu_name === value.menu_name ? "border-2 border-orange-600 p-[3px] rounded-full" : ""} mx-2 m-auto`}
               />
               <div className="text-center mt-3">{value.menu_name}</div>
             </div>
