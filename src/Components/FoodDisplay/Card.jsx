@@ -11,7 +11,7 @@ const Card = ({value}) => {
     <div className="rounded-2xl overflow-hidden shadow-xl w-[24%] max-lg:w-[32.7%] max-md:w-[49%]  mb-[1.3%]">
       <img src={value.image} alt={value.name} className="w-full" />
       <div className="p-5 relative max-md:p-2 max-md:py-5">
-        <div className="absolute z-10 -top-16 right-2">
+        <div className="absolute -top-16 right-2 ">
           {!cartItems[value._id] ? (
             <img
               src={assets.add_icon_white}
@@ -20,7 +20,7 @@ const Card = ({value}) => {
               className="cursor-pointer "
             />
           ) : (
-            <div className="flex bg-white gap-2 p-1 rounded-[50px] items-center">
+            <div className="flex bg-white gap-2 p-1 rounded-[50px] items-center h-4">
               <img
                 src={assets.remove_icon_red}
                 onClick={() =>removeFromCart(value._id)}
