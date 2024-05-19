@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <section
       id="hero-section"
-      className="py-16 mx-auto rounded-[10px] h-[34vw]"
+      className="py-16 mx-auto rounded-[10px] "
       style={{
         background: `url(${assets.header_img}) no-repeat`,
         backgroundSize: "cover",
@@ -18,8 +18,8 @@ const Header = () => {
       }}
     >
       <div className="container mx-auto px-8 flex flex-col md:flex-row items-center">
-        <div className="md:w-1/2 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4 text-white">
+        <div className="md:w-full lg:w-[70%] text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4 text-white ">
             Order your <br /> favourite food here
           </h1>
           <p className="text-primary mb-8 text-white">

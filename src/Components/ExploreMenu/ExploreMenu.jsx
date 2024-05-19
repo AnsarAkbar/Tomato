@@ -4,7 +4,7 @@ import { menu_list } from "../../assets/assets";
 const ExploreMenu = ({ category, setCategory }) => {
   return (
     <div>
-      <div className="py-14">
+      <div className="py-14 max-md:text-center">
         <h3 className="text-2xl font-bold font-outfit">Explore our menu</h3>
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit,

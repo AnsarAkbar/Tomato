@@ -10,10 +10,10 @@ const Footer = () => {
 
   return (
     <div className="bg-[#302F30]">
-      <div className="max-w-[1920px] m-auto px-16 max-lg:px-10 max-md:px-5 py-16 flex justify-between text-white">
-        <div className="w-1/2 ">
-          <img src={logo} alt="" />
-          <p className="py-5">
+      <div className="max-w-[1920px] m-auto px-16 max-lg:px-10 max-md:px-5 py-16 flex justify-between text-white max-md:flex-col max-md:gap-10">
+        <div className="w-1/2 max-md:w-full">
+          <img src={logo} alt="" className="max-md:m-auto"/>
+          <p className="py-5 max-md:text-center">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus cum
             rem incidunt quae reiciendis in consequuntur odit quam,
             voluptatibus, illo ipsa et eligendi reprehenderit voluptates
@@ -22,7 +22,7 @@ const Footer = () => {
             architecto aspernatur quia, commodi numquam neque at sapiente! Est,
             neque distinctio. Commodi dolores velit nam recusandae esse!
           </p>
-          <div className="flex gap-3">
+          <div className="flex gap-3 max-md:justify-center">
             {icons.map((iconsImg, index) => (
               <img
                 src={iconsImg}
@@ -33,7 +33,7 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        <div className="ml-5 flex justify-evenly w-[40%]">
+        <div className="ml-5 flex justify-evenly w-[48%] max-md:w-full">
           <div>
             <h3 className="text-2xl font-bold font-outfit">COMPANY</h3>
             {footerList.map((value, index) => (

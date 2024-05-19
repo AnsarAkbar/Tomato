@@ -6,13 +6,11 @@ const Card = ({value}) => {
     const {cartItems,addToCart,removeFromCart}=useContext(StoreContext)
 
 
-    // console.log("cartItems",cartItems);
 
   return (
-    <div className="rounded-2xl overflow-hidden shadow-xl w-[24%]  mb-[1.3%]">
+    <div className="rounded-2xl overflow-hidden shadow-xl w-[24%] max-lg:w-[32.7%] max-md:w-[49%]  mb-[1.3%]">
       <img src={value.image} alt={value.name} className="w-full" />
-      <div className="p-5 relative ">
-        {/* <img src={assets.add_icon_white} alt="add_icon" className="absolute z-10 -top-16 right-5 cursor-pointer"/> //hover:scale-105 duration-200*/}
+      <div className="p-5 relative max-md:p-2 max-md:py-5">
         <div className="absolute z-10 -top-16 right-2">
           {!cartItems[value._id] ? (
             <img
@@ -37,12 +35,12 @@ const Card = ({value}) => {
             </div>
           )}
         </div>
-        <div className="flex justify-between align-middle">
-          <h3 className="text-xl font-bold font-outfit">{value.name}</h3>
+        <div className="flex justify-between items-center">
+          <h3 className="text-xl font-bold font-outfit max-md:text-[15px]">{value.name}</h3>
           <img
             src={assets.rating_starts}
             alt="rating_starts"
-            className="h-[70%]"
+            className="h-[70%] max-md:w-[30%]"
           />
         </div>
         <div>

@@ -8,7 +8,7 @@ const FoodDisplay = ({ category }) => {
   
   return (
     <>
-      <h3 className="text-2xl font-bold font-outfit py-10">Top dishes near you</h3>
+      <h3 className="text-2xl font-bold font-outfit py-10 max-md:text-center">Top dishes near you</h3>
       <div className="flex justify-between mb-12 flex-wrap">
         {food_list.map((value, index) =>
           category === "All" || category.menu_name === value.category ?
