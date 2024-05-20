@@ -24,85 +24,89 @@ const LoginPop = ({ setShowLogin }) => {
     event.preventDefault();
   };
 
-  return (
-    <div className="max-w-md flex-col flex px-11 py-11 gap-5 rounded-md border-[2px] absolute bg-white right-1/3 top-1/4">
-      <div className="flex justify-between items-center">
-        <p className="text-2xl font-bold font-outfit ">
-          {currentState === "login" ? "Login" : "Sign Up"}
-        </p>
-        <img
-          onClick={() => setShowLogin(false)}
-          src={assets.cross_icon}
-          alt="Close"
-          className="w-4 cursor-pointer h-4"
-        />
-      </div>
-      {currentState === "Sign Up" && (
+  return ( 
+    <div className="max-w-md  px-6 py-8 rounded-md border-[2px] absolute bg-white right-1/3 top-1/4 z-10">
+      <div className=" gap-5 flex-col flex">
+        <div className="flex justify-between items-center">
+          <p className="text-2xl font-bold font-outfit ">
+            {currentState === "login" ? "Login" : "Sign Up"}
+          </p>
+          <img
+            onClick={() => setShowLogin(false)}
+            src={assets.cross_icon}
+            alt="Close"
+            className="w-4 cursor-pointer h-4"
+          />
+        </div>
+        {currentState === "Sign Up" && (
+          <TextField
+            id="outlined-basic"
+            label="Full Name"
+            variant="outlined"
+            className="w-full"
+            required
+          />
+        )}
         <TextField
           id="outlined-basic"
-          label="Full Name"
+          label="Email"
           variant="outlined"
           className="w-full"
           required
         />
-      )}
-      <TextField
-        id="outlined-basic"
-        label="Email"
-        variant="outlined"
-        className="w-full"
-        required
-      />
-      <FormControl className="w-full" variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showPassword ? "text" : "password"}
-          required
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="Password"
-        />
-      </FormControl>
-      <Button
-        variant="outlined"
-        className="w-full"
-        sx={{
-          backgroundColor: "#EF6C00",
-          color: "white",
-          border: "none",
-          textTransform: "none",
-          fontSize: "1rem",
-          paddingY: 1.5,
-          "&:hover": {
-            backgroundColor: "#E65100",
-            border:"none"
-          },
-        }}
-      >
-        {currentState === "login" ? "Login" : "Create account"}
-      </Button>
-      <div className="flex gap-2 items-baseline">
+        <FormControl className="w-full" variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            required
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+        <Button
+          variant="outlined"
+          className="w-full"
+          sx={{
+            backgroundColor: "#EF6C00",
+            color: "white",
+            border: "none",
+            textTransform: "none",
+            fontSize: "1rem",
+            paddingY: 1.5,
+            "&:hover": {
+              backgroundColor: "#E65100",
+              border: "none",
+            },
+          }}
+        >
+          {currentState === "login" ? "Login" : "Create account"}
+        </Button>
+      </div>
+      <div className="flex gap-2 items-baseline pt-3 ">
         <input type="checkbox" required />
         <p>By continuing, I agree to the terms of use & privacy policy</p>
       </div>
-      <div>
+      <div className="pt-4">
         {currentState === "login" ? (
           <>
             Don't have an account?{" "}
             <span
               onClick={() => setCurrentState("Sign Up")}
-              className="text-blue-700 cursor-pointer"
+              className="text-orange-600 cursor-pointer font-medium "
             >
               Click here
             </span>
@@ -112,7 +116,7 @@ const LoginPop = ({ setShowLogin }) => {
             Already have an account?{" "}
             <span
               onClick={() => setCurrentState("login")}
-              className="text-blue-700 cursor-pointer"
+              className="text-orange-600 cursor-pointer font-medium "
             >
               Login
             </span>
