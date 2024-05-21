@@ -20,7 +20,7 @@ const Card = ({value}) => {
               className="cursor-pointer "
             />
           ) : (
-            <div className="flex bg-white gap-2 p-1 rounded-[50px] items-center h-4">
+            <div className="flex bg-white gap-2 px-1 py-5 rounded-[50px] items-center h-4">
               <img
                 src={assets.remove_icon_red}
                 onClick={() =>removeFromCart(value._id)}

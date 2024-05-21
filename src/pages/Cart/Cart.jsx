@@ -85,7 +85,7 @@ const Cart = () => {
               className="w-full"
               required
             />
-            <button className="bg-black hover:bg-orange-600 text-white px-9 py-4 rounded-md text-md duration-300">
+            <button className=" bg-orange-600 hover:bg-orange-700 text-white px-9 py-4 rounded-md text-md duration-200">
               Submit
             </button>
           </div>

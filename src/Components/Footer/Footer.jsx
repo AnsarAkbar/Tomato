@@ -9,7 +9,7 @@ const Footer = () => {
   const icons = [linkedin_icon, facebook_icon, twitter_icon];
 
   return (
-    <div className="bg-[#302F30]">
+    <div id="cantact-us" className="bg-[#302F30]">
       <div className="max-w-[1920px] m-auto px-16 max-lg:px-10 max-md:px-5 py-16 flex justify-between text-white max-md:flex-col max-md:gap-10">
         <div className="w-1/2 max-md:w-full">
           <img src={logo} alt="" className="max-md:m-auto"/>

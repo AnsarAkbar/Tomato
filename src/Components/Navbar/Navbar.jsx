@@ -5,17 +5,17 @@ import Cart from "../../pages/Cart/Cart";
 
 const Navbar = ({setShowLogin}) => {
   let navpages = ["home", "menu", "mobile app", "contact us"];
-  let navurl = ["/", "/menu", "/mobileapp", "/contactus"];
+  let navURL = ["/", "#our-menu", "#app-download", "#cantact-us"];
 
   return (
     <>
-      <header className="bg-white font-outfit max-w-[1920px] px-16 max-lg:px-10 max-md:px-5">
+      <header className="bg-white font-outfit max-w-[1920px] px-16 m-auto max-lg:px-10 max-md:px-5">
         <div className="mx-auto py-4 flex justify-between items-center">
           <Link to={'/'}><img src={assets.logo} alt="" className="max-md:w-28" /></Link>
           <nav className="space-x-5 text-xl max-lg:hidden max-sm:hidden ">
             {navpages.map((values, index) => (
               <a
-                href={navurl[index]}
+                href={values==="home"?"/":navURL[index]}
                 key={index}
                 className={({ isactive }) =>
                   isactive
