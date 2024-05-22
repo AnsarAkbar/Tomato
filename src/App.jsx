@@ -13,7 +13,7 @@ const App = () => {
   const [showLogin,setShowLogin]=useState(false)
   return (
     <>
-      <div className="text-center">oبِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+      {/* <div className="text-center">oبِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div> */}
       {showLogin?<LoginPop showLogin={showLogin} setShowLogin={setShowLogin}/>:<></>}
       <Navbar setShowLogin={setShowLogin}/>
       <div className="max-w-[1920px] m-auto px-16 max-lg:px-10 max-md:px-5">
