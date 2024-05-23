@@ -47,7 +47,6 @@ const Cart = () => {
                     x
                   </p>
                 </div>
-                {/* <p>{...item[]price,item.price}</p> */}
                 <hr />
               </div>
             ) : null
@@ -72,15 +71,6 @@ const Cart = () => {
             <p>${getCartAmount()>0 ? getCartAmount()+4:0}</p>
           </div>
           <hr />
-
-          {/* const DeliveryEliments={Subtotal:getCartAmount(), "Delivey Fee":null, Total:getCartAmount()} */}
-
-          {/* {
-           for (const eliments in DeliveryEliments) {
-            console.log(eliments)
-           }
-          } */}
-
           <button
             onClick={() => navigate("/order")}
             className="bg-black hover:bg-orange-600 text-white px-7 py-4 mt-5 rounded-md text-md duration-300"
