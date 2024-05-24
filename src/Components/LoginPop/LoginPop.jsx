@@ -9,6 +9,7 @@ import {
   InputAdornment,
   IconButton,
   FormControl,
+  Typography,
   InputLabel,
   FormHelperText,
 } from "@mui/material";
@@ -55,7 +56,6 @@ const LoginPop = ({ setShowLogin }) => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log("Form data", values);
-          // Handle form submission
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
@@ -84,7 +84,7 @@ const LoginPop = ({ setShowLogin }) => {
                     required
                     onChange={handleChange}
                     error={Boolean(ErrorMessage.name === "fullName")}
-                    helperText={<ErrorMessage name="fullName" />}
+                    helperText={<Typography variant="body2" className="text-red-600"><ErrorMessage name="fullName" /></Typography>}
                   />
                 </div>
               )}
@@ -99,7 +99,7 @@ const LoginPop = ({ setShowLogin }) => {
                   required
                   onChange={handleChange}
                   error={Boolean(ErrorMessage.name === "email")}
-                  helperText={<ErrorMessage name="email" />}
+                  helperText={<Typography variant="body2" className="text-red-600"><ErrorMessage name="email" /></Typography>}
                 />
               </div>
               <FormControl className="w-full" variant="outlined">
@@ -129,7 +129,7 @@ const LoginPop = ({ setShowLogin }) => {
                   error={Boolean(ErrorMessage.name === "password")}
                 />
                 <FormHelperText>
-                  <ErrorMessage name="password" />
+                <Typography variant="body2" className="text-red-600"><ErrorMessage name="password"/></Typography>
                 </FormHelperText>
               </FormControl>
               <Button

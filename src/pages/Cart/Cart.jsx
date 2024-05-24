@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
-import { TextField, Button } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { ErrorMessage, Formik } from "formik";
+import * as Yup from 'yup'
 
 const Cart = () => {
   const { cartItems, food_list, removeFromCart, getCartAmount } = useContext(StoreContext);
@@ -15,7 +17,11 @@ const Cart = () => {
     "Total",
     "Remove",
   ];
-  const DeliveryEliments={Subtotal:getCartAmount(), "Delivey Fee":null, Total:getCartAmount()}
+
+  const validationSchema = Yup.object().shape({
+    promoCode: Yup.string()
+      .required("Promo Code is required")
+  });
 
   return (
     <>
@@ -62,13 +68,13 @@ const Cart = () => {
           </div>
           <hr />
           <div className="flex justify-between items-center text-black text-lg py-3">
-            <p>Delivey Fee</p>
-            <p>${getCartAmount() > 0 ?4:0}</p>
+            <p>Delivery Fee</p>
+            <p>${getCartAmount() > 0 ? 4 : 0}</p>
           </div>
           <hr />
           <div className="flex justify-between items-center text-black text-lg py-3">
             <p>Total</p>
-            <p>${getCartAmount()>0 ? getCartAmount()+4:0}</p>
+            <p>${getCartAmount() > 0 ? getCartAmount() + 4 : 0}</p>
           </div>
           <hr />
           <button
@@ -78,23 +84,42 @@ const Cart = () => {
             PROCEED TO CHECKOUT
           </button>
         </div>
-        <div className="w-1/3 max-md:w-full">
-          <p className=" text-black text-lg py-3">
-            If you have promo code .Enter it there
-          </p>
-          <div className="flex">
-            <TextField
-              id="outlined-basic"
-              label="promo code"
-              variant="outlined"
-              className="w-full"
-              required
-            />
-            <button className=" bg-orange-600 hover:bg-orange-700 text-white px-9 py-4 rounded-md text-md duration-200">
-              Submit
-            </button>
-          </div>
-        </div>
+
+        <Formik
+          initialValues={{
+            promoCode: ""
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values, actions) => {
+            actions.setSubmitting(false);
+          }}
+        >
+          {({ handleChange, handleSubmit, isSubmitting }) => (
+            <form onSubmit={handleSubmit} className="w-1/3 max-md:w-full">
+              <p className=" text-black text-lg py-3">
+                If you have a promo code, enter it here
+              </p>
+              <div className="flex">
+                <TextField
+                  name="promoCode"
+                  id="outlined-basic"
+                  label="Promo code"
+                  variant="outlined"
+                  className="w-full"
+                  onChange={handleChange}
+                />
+                <button type="submit" className=" bg-orange-600 hover:bg-orange-700 text-white px-9 py-4 rounded-md text-md duration-200" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </div>
+              {isSubmitting && <p>Submitting...</p>}
+              <Typography variant="body2" className="text-red-600">
+                <ErrorMessage name="promoCode" />
+              </Typography>
+            </form>
+          )}
+        </Formik>
+
       </div>
     </>
   );
