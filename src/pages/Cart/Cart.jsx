@@ -79,7 +79,7 @@ const Cart = () => {
           <hr />
           <button
             onClick={() => navigate("/order")}
-            className="bg-black hover:bg-orange-600 text-white px-7 py-4 mt-5 rounded-md text-md duration-300"
+            className="bg-orange-600 hover:bg-orange-700 text-white px-7 py-4 mt-5 rounded-md text-md duration-300"
           >
             PROCEED TO CHECKOUT
           </button>
