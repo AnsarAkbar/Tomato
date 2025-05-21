@@ -19,10 +19,7 @@ const ExploreMenu = ({ category, setCategory }) => {
       <div id="our-menu" className="py-14 text-center">
         <h3 className="text-2xl font-bold font-outfit mb-4">Explore our menu</h3>
         <p className="mb-7 px-4 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit,
-          soluta maiores tenetur nesciunt et accusantium libero aliquid
-          veritatis debitis perspiciatis ducimus nihil porro molestiae eum
-          temporibus non cupiditate quibusdam sint.
+          Discover a variety of delicious categories to satisfy every craving. Browse our menu to find your favorite dishes, from appetizers to desserts, all freshly prepared and ready to enjoy.
         </p>
         <div className="overflow-x-auto whitespace-nowrap py-4">
           <div className="inline-flex gap-4">
