@@ -36,7 +36,6 @@ const StoreContextProvider = (props) => {
 
 
   const contextValue = {
-    food_list,
     foodList,
     setFoodList,
     assets,

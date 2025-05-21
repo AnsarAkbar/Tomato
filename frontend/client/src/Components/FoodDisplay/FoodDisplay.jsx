@@ -12,12 +12,23 @@ const FoodDisplay = ({ category }) => {
   //   url: `http://localhost:8082/api/client/products`,
   //   method: "GET",
   // });
-  const filter={searchValue}
+  
+  // const filter= encodeURIComponent(JSON.stringify({search:searchValue}))
+  let obj = {
+          // page: filterText ? 1 : currentPage,
+          // limit: perPage,
+          // sort,
+          // direction,
+          name: searchValue,
+      };
+
+      const queryString = new URLSearchParams(obj).toString();
+    
   const { data, loading, error,fetchData } = useFetch();
   // console.log('data----->', data)
   useEffect(() => {
     fetchData({
-      url: `http://localhost:8082/api/client/products?filter=${filter}`,
+      url: `http://localhost:8082/api/client/products?${queryString}`,
       method: "GET",
     });
   }

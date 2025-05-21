@@ -6,7 +6,7 @@ import { ErrorMessage, Formik } from "formik";
 import * as Yup from 'yup'
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getCartAmount } = useContext(StoreContext);
+  const { cartItems, foodList, removeFromCart, getCartAmount } = useContext(StoreContext);
   const navigate = useNavigate();
 
   let cartCategorys = [
@@ -37,7 +37,7 @@ const Cart = () => {
           <hr />
         </div>
         <div>
-          {food_list.map((item, index) =>
+          {foodList.map((item, index) =>
             cartItems[item._id] > 0 ? (
               <div className="">
                 <div className="grid grid-cols-6 items-center text-black text-lg py-3">

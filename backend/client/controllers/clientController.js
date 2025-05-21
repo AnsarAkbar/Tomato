@@ -4,8 +4,9 @@ const Order = require('../../models/Order');
 
 // Get all products
 exports.getProducts = async (req, res) => {
+    const { name } = req.query;
     try {
-        const products = await Product.find().populate('category');
+        const products = await Product.find({ name: { $regex: name, $options: 'i' } }).populate('category');
         res.json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });

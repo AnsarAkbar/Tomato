@@ -4,6 +4,7 @@ import { StoreContext } from "../../context/StoreContext";
 
 const Card = ({product}) => {
     const {cartItems,addToCart,removeFromCart}=useContext(StoreContext)
+    // console.log({product})
 
 
   return (

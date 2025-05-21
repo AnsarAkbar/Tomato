@@ -16,7 +16,7 @@ const Navbar = ({ setShowLogin }) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       setSearchValue(value);
-    }, 300);
+    }, 200);
   };
 
   const handleSearchSubmit = (e) => {

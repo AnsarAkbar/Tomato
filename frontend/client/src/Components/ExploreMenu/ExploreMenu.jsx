@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { menu_list } from "../../assets/assets";
 import useFetch from "../../Hooks/useFetch";
 
 const ExploreMenu = ({ category, setCategory }) => {
 
-  const { data, error, loading } = useFetch({
-    url: "http://localhost:8082/api/client/categories",
-    method: "GET",
-  });
+  const { data, error, loading,fetchData  } = useFetch();
+  useEffect(() => {
+    fetchData({
+      url: `http://localhost:8082/api/client/categories`,
+      method: "GET",
+    });
+  }
+  , []);
   // console.log("catego----->", data);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
