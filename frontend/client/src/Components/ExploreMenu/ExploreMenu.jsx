@@ -1,7 +1,19 @@
 import React from "react";
 import { menu_list } from "../../assets/assets";
+import useFetch from "../../Hooks/useFetch";
 
 const ExploreMenu = ({ category, setCategory }) => {
+
+  const { data, error, loading } = useFetch({
+    url: "http://localhost:8082/api/client/categories",
+    method: "GET",
+  });
+  // console.log("catego----->", data);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return <div>No data found</div>;
+  if (data.length === 0) return <div>No category found</div>;
+
   return (
     <div>
       <div id="our-menu" className="py-14 text-center">
@@ -14,23 +26,23 @@ const ExploreMenu = ({ category, setCategory }) => {
         </p>
         <div className="overflow-x-auto whitespace-nowrap py-4">
           <div className="inline-flex gap-4">
-            {menu_list.map((value, index) => (
+            {data.map((value, index) => (
               <div
                 key={index}
                 onClick={() => setCategory(value)}
                 className="flex flex-col items-center cursor-pointer max-md:w-[100px] max-md:h-[100px] overscroll-none"
               >
                 <img
-                  src={value.menu_image}
-                  alt={value.menu_name}
+                  src={value.image}
+                  alt={value.name}
                   className={`${
-                    category.menu_name === value.menu_name
+                    category.name === value.name
                       ? "border-2 border-orange-600 p-[3px] rounded-full"
                       : ""
                   } w-20 h-20 mx-auto`}
                 />
                 <div className="text-center mt-2 text-sm md:text-base">
-                  {value.menu_name}
+                  {value.name}
                 </div>
               </div>
             ))}

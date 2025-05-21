@@ -4,7 +4,7 @@ import ExploreMenu from "../../Components/ExploreMenu/ExploreMenu";
 import FoodDisplay from "../../Components/FoodDisplay/FoodDisplay";
 
 const Home = () => {
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState({name:"All"});
   return (
     <>
       <Banner />
