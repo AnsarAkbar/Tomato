@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const rolesRouter = require('./roles.routes');
+const userRouter = require('./user.routes');
 // Import admin controllers
 const { 
     getDashboardStats,
@@ -22,6 +24,7 @@ const {
 
 // Middleware
 const { isAdmin } = require('../../middleware/auth');
+const app = express();
 
 // Apply admin middleware to all routes
 router.use(isAdmin);
@@ -48,7 +51,8 @@ router.get('/orders', getOrders);
 router.put('/orders/:id/status', updateOrderStatus);
 
 // User routes
-router.get('/users', getUsers);
-router.put('/users/:id/role', updateUserRole);
+router.use('/users', userRouter);
+// Roles routes
+router.use('/roles', rolesRouter);
 
 module.exports = router; 

@@ -43,7 +43,8 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate({ path: "role", select: "name permissions -_id" })
+
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
@@ -52,11 +53,11 @@ exports.login = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
       role: user.role,
-      token: generateToken(user._id)
     });
   } catch (error) {
-    console.log('---->',error.message);
+    console.log('---->', error.message);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
@@ -65,22 +66,22 @@ exports.login = async (req, res) => {
 exports.verifyToken = async (req, res) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
-    
+
     if (!token) {
       return res.status(401).json({ message: 'No token, authorization denied' });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('🚀',decoded);
+    console.log('🚀', decoded);
     const user = await User.findById(decoded.userId).select('-password');
-    
+
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
 
     res.json({ user });
   } catch (error) {
-    console.log('error 🚀',error);
+    console.log('error 🚀', error);
     res.status(401).json({ message: 'Token is not valid' });
   }
 }; 
