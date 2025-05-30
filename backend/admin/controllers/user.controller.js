@@ -1,16 +1,10 @@
-const User = require('../models/roles.model.js');
-// const Role = require('../../models/Role');
+const User = require('../../models/user.model.js');
 const response = require('../../utils/responseUtil.js');
 const Role = require('../models/roles.model.js');
 // User Management
 exports.getUsers = async (req, res) => {
     try {
-        const users = await User.find().and({ role: { $ne: 'admin' } })
-            .select('-password')
-            .populate({
-                path: 'role',
-                select: 'name permissions'
-            });
+        const users = await User.find().populate({path: 'role', select: 'name permissions'})
 
         console.log('users--->', users);
         // if (!users) {

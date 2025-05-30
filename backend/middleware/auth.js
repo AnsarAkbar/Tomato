@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user.model.js');
 
 exports.isAdmin = async (req, res, next) => {
     try {
@@ -41,6 +41,7 @@ exports.auth = async (req, res, next) => {
         if (!token) {
             return res.status(401).json({ message: 'No token, authorization denied' });
         }
+
 
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { login, register, verifyToken } = require('../controllers/authController');
+const { login, register, verifyToken } = require('../controllers/auth.controller');
 const { auth } = require('../middleware/auth');
 
 // Public routes

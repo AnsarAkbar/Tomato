@@ -1,6 +1,6 @@
-const Product = require('../../models/Product');
-const Category = require('../../models/Category');
-const Order = require('../../models/Order');
+const Product = require('../../models/product.model');
+const Category = require('../../models/category.model');
+const Order = require('../../models/order.model');
 
 // Get all products
 exports.getProducts = async (req, res) => {
