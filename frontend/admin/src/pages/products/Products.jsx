@@ -230,6 +230,18 @@ const Products = () => {
   // Handle form field changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    // Handle file upload and convert to Base64
+    // if (type === 'file') {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file); // Convert to Base64
+    //   reader.onload = () => {
+    //     setFormData(prev => ({
+    //       ...prev,
+    //       [name]: reader.result
+    //     }));
+    //   };
+    //   return;
+    // }
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
@@ -244,14 +256,14 @@ const Products = () => {
   // Filter and search products
   const filteredProducts = products
     .filter(product =>
-      product?.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+      product?.name.toLowerCase().includes(searchTerm.toLowerCase())
       // ||
       // product?.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .filter(product =>
       categoryFilter === 'all' || product?.category?._id === categoryFilter
     );
-    console.log('filteredProducts--->', filteredProducts);
+  console.log('filteredProducts--->', filteredProducts);
   // Pagination handlers
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -399,21 +411,21 @@ const Products = () => {
       </Grid>
 
 
-        {/* <div className="overflow-x-auto"> */}
-        <DataTable
-          title="Products List"
-          columns={Columns( currentPage, rowsPerPage, handleOpenDialog, handleDelete)}
-          data={filteredProducts}
-          pagination={true}
-          // paginationPerPage={10} // Default rows per page
-          // paginationRowsPerPageOptions={[5, 10, 15, 20]}
-          onChangePage={(page) => setCurrentPage(page)}
-          onChangeRowsPerPage={(perPage, page) => {
-            setRowsPerPage(perPage);
-            setCurrentPage(page);
-          }}
-        />
-        {/* </div> */}
+      {/* <div className="overflow-x-auto"> */}
+      <DataTable
+        title="Products List"
+        columns={Columns(currentPage, rowsPerPage, handleOpenDialog, handleDelete)}
+        data={filteredProducts}
+        pagination={true}
+        // paginationPerPage={10} // Default rows per page
+        // paginationRowsPerPageOptions={[5, 10, 15, 20]}
+        onChangePage={(page) => setCurrentPage(page)}
+        onChangeRowsPerPage={(perPage, page) => {
+          setRowsPerPage(perPage);
+          setCurrentPage(page);
+        }}
+      />
+      {/* </div> */}
 
 
       {/* Add/Edit Product Dialog */}

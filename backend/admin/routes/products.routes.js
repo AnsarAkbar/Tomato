@@ -10,11 +10,12 @@ const {
     updateProduct,
     deleteProduct
 } = require('../controllers/product.controller');
+const { upload } = require('../../utils/cloudinary');
 
 
 
 // Multer configuration (stores files temporarily in memory)
-const upload = multer({ storage: multer.memoryStorage() });
+// const upload = multer({ storage: multer.memoryStorage() });
 
 // Routes  checkPermissions('create-product'),
 router.get('/', auth, checkPermissions('view-products'), getProducts);

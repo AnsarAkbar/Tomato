@@ -1,5 +1,7 @@
 const { v2: cloudinary } = require('cloudinary');
 const streamifier = require('streamifier');
+const multer = require('multer');
+const sharp = require('sharp');
 
 // Configure Cloudinary (use environment variables in production)
 cloudinary.config({
@@ -8,6 +10,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Multer configuration (stores files temporarily in memory)
+const upload = multer({ storage: multer.memoryStorage() });
+
+const compressor = async (buffer) => {
+  return await sharp(buffer).resize({ width: 800, height: 600, fit: 'contain' }).toBuffer();
+};
+
+
 /**
  * Uploads a file to Cloudinary (supports Buffer, Base64, or file path)
  * @param {Buffer|string} file - File data (Buffer, Base64, or temp path)
@@ -15,24 +25,23 @@ cloudinary.config({
  * @param {object} transformations - Image transformations (optional)
  * @returns {Promise<object>} Cloudinary upload result
  */
-const uploadToCloudinary = (file, folder = 'products', transformations = {}) => {
+const uploadToCloudinary = async (file, folder = 'products', transformations = {}) => {
+  const compressedFile = await compressor(file);
   return new Promise((resolve, reject) => {
-    // Handle Buffer data (from Multer memory storage)
     if (Buffer.isBuffer(file)) {
       const uploadStream = cloudinary.uploader.upload_stream(
         { folder, ...transformations },
         (error, result) => error ? reject(error) : resolve(result)
       );
-      streamifier.createReadStream(file).pipe(uploadStream);
-    } 
-    // Handle Base64 or file path
-    else {
-      cloudinary.uploader.upload(file, { folder, ...transformations })
+      streamifier.createReadStream(compressedFile).pipe(uploadStream);
+    } else {
+      cloudinary.uploader.upload(compressedFile, { folder, ...transformations })
         .then(resolve)
         .catch(reject);
     }
   });
 };
+
 
 
 /**
@@ -57,27 +66,26 @@ const getCloudinaryUrl = (publicId, transformations = {}) => {
   });
 };
 
-const updateFromCloudinary = (file, folder = 'products', transformations = {}, oldPublicId = null) => {
-  return new Promise((resolve, reject) => {
+const updateFromCloudinary = async (file, folder = 'products', transformations = {}, oldPublicId = null) => {
+  return new Promise(async (resolve, reject) => {
     const handleResult = (result) => {
       if (oldPublicId) {
         cloudinary.uploader.destroy(oldPublicId)
           .then(() => resolve(result))
-          .catch(() => resolve(result)); // Ignore deletion errors, still resolve upload
+          .catch(() => resolve(result));
       } else {
         resolve(result);
       }
     };
+    const compressedFile = await compressor(file);
     if (Buffer.isBuffer(file)) {
       const uploadStream = cloudinary.uploader.upload_stream(
         { folder, ...transformations },
         (error, result) => error ? reject(error) : handleResult(result)
       );
-      streamifier.createReadStream(file).pipe(uploadStream);
-    } 
-    // Handle Base64 or file path
-    else {
-      cloudinary.uploader.upload(file, { folder, ...transformations })
+      streamifier.createReadStream(compressedFile).pipe(uploadStream);
+    } else {
+      cloudinary.uploader.upload(compressedFile, { folder, ...transformations })
         .then(handleResult)
         .catch(reject);
     }
@@ -88,5 +96,6 @@ module.exports = {
   uploadToCloudinary,
   deleteFromCloudinary,
   getCloudinaryUrl,
-  updateFromCloudinary
+  updateFromCloudinary,
+  upload
 };
