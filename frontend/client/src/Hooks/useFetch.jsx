@@ -9,7 +9,7 @@ function useFetch() {
     const { searchValue } = useContext(StoreContext);
     // useEffect(() => {
     const fetchData = async ({ url, method = 'GET', body = null }) => {
-        console.log(url, method, body)
+        // console.log(url, method, body)
         try {
             setLoading(true);
             const response = await axios({

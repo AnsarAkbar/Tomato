@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useFetch from './useFetch';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 export const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState( false);
     const [loading, setLoading] = useState(true);
@@ -44,27 +45,22 @@ export const useAuth = () => {
     }, []);
 
     const login = async (credentials) => {
+        // console.log(credentials)
         try {
-            const response = await fetchData({
-                url: `${import.meta.env.VITE_API_URL}/auth/login`,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(credentials)
-            });
-
-            if (!response.ok) {
-                throw new Error('Login failed');
+            const response= await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, credentials);
+            // console.log(response)
+            if (response.data.error) {
+                return { success: false, error: response.data.error }
             }
 
-            const { token } = await response.json();
+            const { token } = response.data;
+            // console.log('Token-->', token)
             localStorage.setItem('clientToken', token);
             setIsAuthenticated(true);
             navigate('/');
             return { success: true };
         } catch (error) {
-            console.error('Login error:', error);
+            // console.error('Login error:', error);
             return { success: false, error: error.message };
         }
     };
@@ -80,12 +76,13 @@ export const useAuth = () => {
             return { success: false, error: 'Passwords do not match' }
         }
         try {
-            const response = await fetchData({
-                url: `${import.meta.env.VITE_API_URL}/auth/register`,
-                method: 'POST',
-                body: credentials
-            })
-            console.log(response)
+            // const response = await fetchData({
+            //     url: `${import.meta.env.VITE_API_URL}/auth/register`,
+            //     method: 'POST',
+            //     body: credentials
+            // })
+            // console.log(response)
+            await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, credentials)
             return { success: true }
         } catch (error) {
             console.log(error.message)

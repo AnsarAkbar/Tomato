@@ -23,7 +23,8 @@
     "multer": "^2.0.0",
     "nodemailer": "^7.0.3",
     "sharp": "^0.34.2",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

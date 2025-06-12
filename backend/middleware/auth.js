@@ -37,6 +37,7 @@ exports.auth = async (req, res, next) => {
     try {
         // Get token from header
         const token = req.header('Authorization')?.replace('Bearer ', '');
+        // console.log('token', req.header('Authorization'));
         
         if (!token) {
             return res.status(401).json({ message: 'No token, authorization denied' });

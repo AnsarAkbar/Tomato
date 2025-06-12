@@ -7,7 +7,7 @@ const ExploreMenu = ({ category, setCategory }) => {
   
   useEffect(() => {
     fetchData({
-      url: `http://localhost:8082/api/client/categories`,
+      url: `${import.meta.env.VITE_API_URL}/client/categories`,
       method: "GET",
     });
   }, []);

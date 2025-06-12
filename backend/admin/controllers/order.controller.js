@@ -1,4 +1,8 @@
 const Order = require('../../models/order.model');
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const dotenv = require('dotenv').config();
+
+
 
 // Order Management
 exports.getOrders = async (req, res) => {

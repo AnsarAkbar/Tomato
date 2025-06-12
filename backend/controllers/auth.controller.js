@@ -47,7 +47,7 @@ exports.register = async (req, res) => {
 
 // Login User
 exports.login = async (req, res) => {
-  // console.log('---->',req.body);
+  console.log('---->',req.body);
   try {
     const { email, password } = req.body;
 
@@ -80,7 +80,7 @@ exports.verifyToken = async (req, res) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('🚀', decoded);
+    // console.log('🚀', decoded);
     const user = await User.findById(decoded.userId).select('-password');
 
     if (!user) {
