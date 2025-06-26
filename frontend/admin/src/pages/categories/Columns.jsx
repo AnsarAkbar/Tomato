@@ -13,7 +13,7 @@ const Columns = (
 		{
 			name: 'Serial No',
 			cell: (row, index) => ((currentPage - 1) * rowsPerPage) + index + 1,
-			width: '100px',
+			// width: '100px',
 			center: true,
 			width: '140px',
 		},

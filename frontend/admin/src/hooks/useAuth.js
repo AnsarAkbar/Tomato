@@ -46,7 +46,7 @@ export const useAuth = () => {
             if (!response.ok) throw new Error('Login failed');
 
             const { token } = await response.json();
-            localStorage.setItem('adminTokin', token);
+            localStorage.setItem('adminToken', token);
             setIsAuthenticated(true);
             return { success: true };
         } catch (error) {

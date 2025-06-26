@@ -1,39 +1,47 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { useAuth } from "../../Hooks/useAuth";
+import { useDebouncedCallback } from "use-debounce";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { searchValue, setSearchValue, cartItems } = useContext(StoreContext);
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-  const debounceRef = useRef();
 
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Menu", path: "#our-menu" },
     { name: "Mobile App", path: "#app-download" },
-    { name: "Contact Us", path: "/contact" }
+    { name: "Contact Us", path: "/contact" },
   ];
+
+  // Debounced search handler
+  const debouncedSearch = useDebouncedCallback((value) => {
+    setSearchValue(value);
+    console.log("Debounced search value:", value); // For debugging
+  }, 300);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      setSearchValue(value);
-    }, 200);
+    setSearchValue(value); // Immediate UI update
+    debouncedSearch(value); // Debounced context update
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("Search submitted:", searchValue);
+    if (searchValue.trim()) {
+      console.log("Search submitted:", searchValue);
+      // Optional: Navigate to search results
+      // navigate(`/search?query=${encodeURIComponent(searchValue)}`);
+    }
   };
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -61,7 +69,7 @@ const Navbar = () => {
           {/* Search, Cart, and Auth */}
           <div className="flex items-center space-x-4">
             {/* Search Bar */}
-            <form 
+            <form
               onSubmit={handleSearchSubmit}
               className="hidden md:flex items-center bg-gray-50 rounded-full px-3 py-2 focus-within:ring-2 focus-within:ring-orange-500 focus-within:bg-white transition-all duration-300"
             >
@@ -76,20 +84,30 @@ const Navbar = () => {
                 type="submit"
                 className="text-gray-400 hover:text-orange-600 transition-colors duration-300"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </button>
             </form>
 
             {/* Cart Icon */}
-            <Link 
-              to="/cart" 
+            <Link
+              to="/cart"
               className="relative p-2 text-gray-700 hover:text-orange-600 transition-colors duration-300"
             >
               <img src={assets.basket_icon} alt="Cart" className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {Object.getOwnPropertyNames(cartItems).length}
+                {Object.keys(cartItems).length}
               </span>
             </Link>
 
@@ -163,7 +181,7 @@ const Navbar = () => {
               <input
                 type="search"
                 placeholder="Search for food..."
-                className="w-full px-3 py-2 rounded-full bg-gray-50 border-none focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                class молимпус="w-full px-3 py-2 rounded-full bg-gray-50 border-none focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
                 value={searchValue}
                 onChange={handleInputChange}
               />

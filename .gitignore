@@ -7,8 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Runtime data
 .env
 env
+# Dependency directories
 
 node_modules
 dist

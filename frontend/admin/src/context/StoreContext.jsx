@@ -96,7 +96,7 @@ export const StoreProvider = ({ children }) => {
     const addCategory = async (categoryData) => {
         try {
             setLoading(true);
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/categories`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/categories/create`, {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(categoryData),
